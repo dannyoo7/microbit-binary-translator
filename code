@@ -1,0 +1,70 @@
+from microbit import *
+#danny lanssink
+#dario douma
+#variable
+Binair = []
+Results = [ 0, 0, 0, 0, 0, 0, 0, 0, 0,]
+Presses = 0
+Count = 0
+Final = 0
+Number = 0
+Done = False
+#variable
+#def
+def test():
+    display.show(Image.SAD)
+    sleep(1000)
+    display.clear()
+    done = True
+    return
+#def
+while True:
+#a + b
+  if button_a.was_pressed() and button_b.was_pressed():
+    if Presses == 8: # als var presses gelijk is aan 8
+      Results[0] = Binair[7] * 1 
+      Results[1] = Binair[6] * 2
+      Results[2] = Binair[5] * 4
+      Results[3] = Binair[4] * 8
+      Results[4] = Binair[3] * 16
+      Results[5] = Binair[2] * 32
+      Results[6] = Binair[1] * 64
+      Results[7] = Binair[0] * 128
+      for i in range(8): # 8x loop
+        Final += Results[Count] # final = van array "Results" count[nummer]
+        Count += 1 # voeg 1 toe aan count
+      Count = 0 #zet count terug naar 0 [gebeurt wanneer de range loop voltooid is]
+      display.scroll(str(Final))
+      sleep(10000)
+      reset()
+# a + b
+#a
+  if button_a.get_presses():
+    if not button_b.get_presses(): #0
+      if Presses < 8:
+        Binair.append(0) #voeg 0 toe aan rij binair
+        Presses += 1 #voeg 1 toe bij variable presses
+        Number += 1 #voeg 1 toe bij number
+        display.show(str(Binair[Number-1])) # laat zien binair [ rij nummer -1]
+        sleep(1000)
+      elif Presses == 8: # als er meer dan 8keer is gedrukt voer uit :
+        if Done == False: 
+            test()
+#a
+#B
+  if button_b.get_presses(): #1
+    if not button_a.get_presses():
+      if Presses < 8:
+        Binair.append(1) # voeg 1 toe aan rij binair
+        Presses += 1 #voeg 1 toe bij variable presses
+        Number += 1 # voeg 1 toe aan variable number
+        display.show(str(Binair[Number-1])) # laat zien binair [ rij nummer -1]
+        sleep(1000)
+      elif Presses == 8: 
+        if Done == False:
+            test()
+#b
+#anders
+  else:
+    display.show(str(Presses))
+#anders
